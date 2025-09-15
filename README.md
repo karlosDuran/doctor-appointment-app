@@ -59,3 +59,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Cambios Recientes
+
+### Internacionalización
+- Se implementó soporte multiidioma descargando el paquete de localización correspondiente de Laravel
+- La aplicación ahora puede cambiar dinámicamente entre diferentes idiomas
+
+### Funcionalidad de Perfil
+- Se activó la función para agregar foto de perfil de usuario
+- Los usuarios ahora pueden subir y actualizar su imagen de perfil desde la configuración de cuenta
