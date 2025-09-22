@@ -9,7 +9,6 @@
                     </svg>
                 </button>
                 <a href="/" class="flex ms-2 md:me-24">
-                    <img src="https://static.vecteezy.com/system/resources/thumbnails/022/664/807/small_2x/cat-face-silhouettes-cat-face-svg-black-and-white-cat-vector.jpg" class="h-8 me-3" alt="la grasa" />
                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
             </div>
