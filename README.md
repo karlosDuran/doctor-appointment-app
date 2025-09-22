@@ -69,3 +69,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ### Funcionalidad de Perfil
 - Se activó la función para agregar foto de perfil de usuario
 - Los usuarios ahora pueden subir y actualizar su imagen de perfil desde la configuración de cuenta
+### Integración de Flowbite
+- Se incorporó la librería **Flowbite** en el proyecto para mejorar la interfaz de usuario.
+- Se modificaron las vistas y layouts principales (`admin.blade.php`, `admin.php`, `admin.layout.pgp`, `dashboard.blade.php`, `navigation.blade.php`, `show.blade.php`, `side.blade.pgp`) para integrar componentes de Flowbite.
+- El archivo de estilos `app.css` fue ajustado para la correcta visualización de los elementos de Flowbite.
+
+### Barra de Navegación
+- Se reemplazó la barra de navegación existente por el componente **Navbar de Flowbite**.
+- Se centralizó el acceso a la navegación importando Flowbite en la raíz del proyecto.
+- El logo fue actualizado por un **gato** como ícono principal de la aplicación.
+
+### Funcionalidad de Perfil
+- Se implementó una plantilla de **perfil de usuario** utilizando componentes de Flowbite.
+- Al acceder a la sección de perfil, se muestra la información personal del usuario con el diseño renovado.
+- Los enlaces de navegación fueron actualizados para redirigir correctamente a la nueva sección de perfil con Flowbite.
