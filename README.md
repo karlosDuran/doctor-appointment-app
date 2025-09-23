@@ -83,3 +83,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Se implementó una plantilla de **perfil de usuario** utilizando componentes de Flowbite.
 - Al acceder a la sección de perfil, se muestra la información personal del usuario con el diseño renovado.
 - Los enlaces de navegación fueron actualizados para redirigir correctamente a la nueva sección de perfil con Flowbite.
+  -
