@@ -1,3 +1,4 @@
+@props(['breadcrumbs' => []])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -14,6 +15,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://kit.fontawesome.com/793c0ad883.js" crossorigin="anonymous"></script>
+    {{--wireUI--}}
+    <wireui:scripts />
     <!-- Styles -->
     @livewireStyles
 </head>
@@ -25,10 +28,10 @@
 
             <div class="p-4 sm:ml-64">
                 <!--margin top -->
-                <div class="mt-14">
-                    {{$slot}}
+                <div class="mt-14 flex items-center justify-between w-full">
+                    @include('layouts.include.admin.breadcrumb')
                 </div>
-
+                {{$slot}}
             </div>
 
 
