@@ -11,27 +11,10 @@ $links = [
   'header' => 'Hospital',
 ],
 [
-        'name' => 'Dashboard',
-        'icon' => 'fa-solid fa-gauge',
-        'href' => route('admin.dashboard'),
-        'active' => false,
-        'submenu' => [
-            [
-                'name' => 'Ian master',
-                'href'=> '#',
-                'active' => false,
-            ],
-            [
-                'name' => 'Billing',
-                'href'=> '#',
-                'active' => false,
-            ],
-            [
-                'name' => 'Invoice',
-                'href'=> '#',
-                'active' => false,
-            ],
-    ],
+        'name' => 'Roles y permisos',
+        'icon' => 'fa-solid fa-shield-halved',
+        'href' => route('admin.admin.roles.index'),
+        'active' => request()->routeIs('admin.roles.*'),
 ]
 ];
 
