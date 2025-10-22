@@ -1,6 +1,6 @@
 <x-admin-layout
     title="Roles | Simify"
-    :breadcrumb="[
+    :breadcrumbs="[
     [
         'name' => 'Dashboard',
         'route' => route('admin.dashboard'),
@@ -10,5 +10,5 @@
     ],
 ]"
 >
-
+@livewire('admin.datatables.role-table')
 </x-admin-layout>
