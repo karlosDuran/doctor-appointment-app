@@ -28,7 +28,11 @@ class RoleTable extends DataTableComponent
                 ->format(function ($value) {
                     return $value->format('d-m-Y');
                 }),
-
+                Column::make("acciones")
+                 ->label(function ($row) {
+                     return view('admin.roles.actions',
+                         ['role' => $row]);
+                 })
         ];
     }
 }

@@ -29,10 +29,20 @@
 @include('layouts.includes.admin.sidebar')
 
 <div class="p-4 sm:ml-64">
-    <!--margin top -->
     <div class="mt-14 flex items-center justify-between w-full">
+
+        {{-- Esto muestra las migas de pan a la izquierda --}}
         @include('layouts.includes.admin.breadcrumb')
+
+        {{-- ESTA ES LA LÍNEA QUE FALTABA --}}
+        {{-- Esto imprimirá tu botón a la derecha --}}
+        <div>
+            {{ $action ?? '' }}
+        </div>
+
     </div>
+
+    {{-- El slot principal (la tabla) se imprime debajo --}}
     {{$slot}}
 </div>
 
