@@ -14,14 +14,30 @@ $links = [
         'name' => 'Roles y permisos',
         'icon' => 'fa-solid fa-shield-halved',
         'href' => route('admin.admin.roles.index'),
-        'active' => request()->routeIs('admin.roles.*'),
+
+        // ¡He hecho una pequeña corrección aquí!
+        // Tu ruta 'href' usa 'admin.admin.roles.index',
+        // así que 'active' debería comprobar 'admin.admin.roles.*'
+        'active' => request()->routeIs('admin.admin.roles.*'),
+],
+
+// --- ¡NUEVO BLOQUE PARA USUARIOS! ---
+[
+        'name' => 'Usuarios',
+        'icon' => 'fa-solid fa-users', // Un ícono apropiado para usuarios
+        'href' => route('admin.admin.users.index'), // Ruta que creamos en el admin.php
+        'active' => request()->routeIs('admin.admin.users.*'), // Para que se resalte
 ]
+// --- FIN DEL NUEVO BLOQUE ---
+
 ];
 
 @endphp
 
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        {{-- El resto de tu archivo (el bucle @foreach)
+             no necesita ningún cambio --}}
         <ul class="space-y-2 font-medium">
             @foreach ($links as $link)
                 <li>
