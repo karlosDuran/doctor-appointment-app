@@ -1,17 +1,32 @@
+<!-- resources/views/admin/roles/create.blade.php -->
 <x-admin-layout
-    title="Roles | simify"
+    title="Roles | MediCitas"
     :breadcrumbs="[
         [
             'name' => 'Dashboard',
-            'href' => route ('admin.dashboard'),
+            'href' => route('admin.dashboard'),
         ],
-
         [
             'name' => 'Roles',
-            'href' => route ('admin.admin.roles.index')
+            'href' => route('admin.admin.roles.index'),
         ],
         [
-            'name' => 'Nuevo'
+            'name' => 'Crear'
         ]
-    ]">
+    ]"
+>
+    <x-wire-card>
+        <form action="{{ route('admin.admin.roles.store') }}" method="POST">
+            @csrf
+
+            <x-wire-input label="Nombre" name="name" placeholder="Nombre del rol" value="{{ old('name') }}">
+            </x-wire-input>
+
+            <div class="flex-justify-end mt-4">
+                <x-wire-button type='submit' blue>Guardar</x-wire-button>
+            </div>
+        </form>
+    </x-wire-card>
+
+
 </x-admin-layout>
