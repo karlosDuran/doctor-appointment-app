@@ -19,6 +19,7 @@
     </x-slot>
 
     {{-- ¡HEMOS ELIMINADO LA LÍNEA @livewire DE AQUÍ! --}}
+    @livewire('admin.datatables.user-table')
     {{-- Ahora la página cargará sin errores y mostrará el fondo vacío. --}}
 
 </x-admin-layout>
