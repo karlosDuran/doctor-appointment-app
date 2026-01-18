@@ -31,6 +31,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        // AGREGA ESTOS CAMPOS:
+        'id_number',
+        'phone',
+        'address',
+
     ];
 
     /**
