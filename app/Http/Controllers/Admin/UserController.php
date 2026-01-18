@@ -69,7 +69,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.edit', compact('roles' ,'user'));
     }
 
     /**
@@ -77,7 +78,33 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|string|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed', // Change required to nullable
+            'id_number' => 'required|string|min:5|max:20|regex:/^[A-Za-z0-9\-]+$/|unique:users,id_number,' . $user->id,
+            'phone' => 'required|digits_between:7,15',
+            'address' => 'required|string|min:3|max:255',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+        unset($data['password']);
+
+        $user->update($data);
+
+        //si el usuario quiere cambiar su contraseña que la cambie, si no ño
+
+        if ($request->filled('password')) {
+            $user-> password = bcrypt($request->password);
+            $user->save();
+        }
+        $user->roles()->sync($data['role_id']);
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Usuario actualizado',
+            'text' => 'El usuario ha sido actualizado exitosamente'
+
+        ]);
+        return redirect()->route('admin.admin.users.edit',$user)->with('success', 'User updated successfully.');
     }
 
     /**
