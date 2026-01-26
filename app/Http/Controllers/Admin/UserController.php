@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         //
         $roles = Role::all();
-        return view('admin.users.create', compact('roles' ));
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -70,7 +70,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view('admin.users.edit', compact('roles' ,'user'));
+        return view('admin.users.edit', compact('roles', 'user'));
     }
 
     /**
@@ -94,7 +94,7 @@ class UserController extends Controller
         //si el usuario quiere cambiar su contraseña que la cambie, si no ño
 
         if ($request->filled('password')) {
-            $user-> password = bcrypt($request->password);
+            $user->password = bcrypt($request->password);
             $user->save();
         }
         $user->roles()->sync($data['role_id']);
@@ -104,7 +104,7 @@ class UserController extends Controller
             'text' => 'El usuario ha sido actualizado exitosamente'
 
         ]);
-        return redirect()->route('admin.admin.users.edit',$user)->with('success', 'User updated successfully.');
+        return redirect()->route('admin.admin.users.edit', $user)->with('success', 'User updated successfully.');
     }
 
     /**
@@ -112,6 +112,22 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (auth()->id() === $user->id) {
+            abort(403);
+        }
+
+        //Eliminar roles asociados a un usuario
+        $user->roles()->detach();
+
+        //Eliminar el usuario
+        $user->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Usuario eliminado',
+            'text' => 'El usuario ha sido eliminado exitosamente'
+        ]);
+
+        return redirect()->route('admin.admin.users.index');
     }
 }
