@@ -27,6 +27,12 @@ $links = [
         'icon' => 'fa-solid fa-users', // Un ícono apropiado para usuarios
         'href' => route('admin.admin.users.index'), // Ruta que creamos en el admin.php
         'active' => request()->routeIs('admin.admin.users.*'), // Para que se resalte
+],
+[
+        'name' => 'Pacientes',
+        'icon' => 'fa-solid fa-user-injured', // Un ícono apropiado para usuarios
+        'href' => route('admin.admin.patients.index'), // Ruta que creamos en el admin.php
+        'active' => request()->routeIs('admin.admin.patients.*'), // Para que se resalte
 ]
 // --- FIN DEL NUEVO BLOQUE ---
 

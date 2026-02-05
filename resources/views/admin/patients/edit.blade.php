@@ -1,0 +1,18 @@
+<x-admin-layout
+    title="Pacientes | MediCitas"
+    :breadcrumbs="[
+        [
+            'name' => 'Dashboard',
+            'href' => route ('admin.dashboard'),
+        ],
+
+        [
+            'name' => 'Pacientes',
+            'href' => route('admin.admin.patients.index')
+        ],
+        [
+            'name' => 'Editar'
+        ]
+    ]">
+
+</x-admin-layout>
