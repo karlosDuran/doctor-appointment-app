@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         // llamar a Role Seeder
         $this->call([
             RoleSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            BloodTypeSeeder::class,
         ]);
 
         //crear un usuario de prueba cada que se ejecuten migraciones
