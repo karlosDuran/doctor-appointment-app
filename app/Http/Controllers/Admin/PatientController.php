@@ -82,7 +82,7 @@ class PatientController extends Controller
                 'text' => 'Los datos del paciente se han actualizado correctamente.',
             ]
         );
-        return redirect()->route('admin.patients.edit', $patient)->with('success', 'Paciente actualizado correctamente');
+        return redirect()->route('admin.admin.patients.edit', $patient)->with('success', 'Paciente actualizado correctamente');
     }
 
     /**

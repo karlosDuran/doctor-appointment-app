@@ -245,15 +245,17 @@ foreach ($errorGrupos as $tabName => $fields) {
 
                     {{--contenido de Tab3: Información general--}}
                     <div x-show="tab === 'informacion-general'" style="display: none;">
-                        <x-wire-native-select label="Tipo de sangre" class="mb-4" name="blood_type_id">
-                            <option value="">Seleccione un tipo de sangre</option>
-                            @foreach ($bloodTypes as $bloodType)
-                                <option value="{{ $bloodType->id }}"  
-                                    @selected(old('blood_type_id', $patient->blood_type_id) == $bloodType->id)>
-                                    {{ $bloodType->name }}
-                                </option>
-                            @endforeach
-                        </x-wire-native-select>
+                        <div class="mb-4">
+                            <label for="blood_type_id" class="block text-sm font-medium text-gray-700 mb-1">Tipo de sangre</label>
+                            <select id="blood_type_id" name="blood_type_id" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                <option value="">Seleccione un tipo de sangre</option>
+                                @foreach ($bloodTypes as $bloodType)
+                                    <option value="{{ $bloodType->id }}" @selected(old('blood_type_id', $patient->blood_type_id) == $bloodType->id)>
+                                        {{ $bloodType->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <x-wire-textarea label="Observaciones" name="observations">
                             {{ old('observations', $patient->observations) }}
