@@ -156,6 +156,7 @@ return [
     'url' => 'El campo :attribute debe ser una URL válida.',
     'uuid' => 'El campo :attribute debe ser un UUID válido.',
     'attributes' => [
+        'allergies' => 'alergias',
         'address' => 'dirección',
         'affiliate_url' => 'URL de afiliado',
         'age' => 'edad',
