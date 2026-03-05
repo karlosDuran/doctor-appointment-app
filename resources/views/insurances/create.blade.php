@@ -18,6 +18,7 @@
         <div class="p-6">
             <p class="text-sm text-gray-600 mb-6">Completa el siguiente formulario para registrar una nueva aseguradora en el sistema.</p>
 
+            {{-- Form to create a new insurance record --}}
             <form action="{{ route('admin.admin.insurances.store') }}" method="POST">
                 @csrf
                 
