@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController; // <-- 1. AÑADIR ESTA LÍNEA
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\InsuranceController;
 
 Route::get('/', function () {
     return view('admin.dashboard');
@@ -22,3 +23,6 @@ Route::resource('patients', PatientController::class)->names('admin.patients');
 
 // Gestión de doctores
 Route::resource('doctors', DoctorController::class)->names('admin.doctors');
+
+// Gestión de aseguradoras
+Route::resource('insurances', InsuranceController::class)->names('admin.insurances');
