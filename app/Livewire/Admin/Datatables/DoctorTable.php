@@ -21,9 +21,11 @@ class DoctorTable extends DataTableComponent
             Column::make("Id", "id")->sortable(),
             Column::make("Nombre", "user.name")->sortable(),
             Column::make("Email", "user.email")->sortable(),
-            Column::make("Especialidad", "speciality.name")->sortable()
+            Column::make("DNI", "user.id_number")->sortable()
                 ->format(fn($value) => $value ?? 'N/A'),
-            Column::make("Licencia", "medical_license_number")->sortable()
+            Column::make("Teléfono", "user.phone")->sortable()
+                ->format(fn($value) => $value ?? 'N/A'),
+            Column::make("Especialidad", "speciality.name")->sortable()
                 ->format(fn($value) => $value ?? 'N/A'),
             Column::make("Acciones")
                 ->label(fn($row) => view('admin.doctors.actions', ['doctor' => $row])),

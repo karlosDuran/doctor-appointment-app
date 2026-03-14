@@ -41,6 +41,12 @@
             'active' => request()->routeIs('admin.admin.doctors.*'), // Para que se resalte
         ],
         [
+            'name' => 'Citas médicas',
+            'icon' => 'fa-solid fa-calendar-check',
+            'href' => route('admin.admin.appointments.index'),
+            'active' => request()->routeIs('admin.admin.appointments.*'),
+        ],
+        [
             'name' => 'Aseguradoras',
             'icon' => 'fa-solid fa-briefcase',
             'href' => route('admin.admin.insurances.index'),
