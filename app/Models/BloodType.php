@@ -8,7 +8,7 @@ class BloodType extends Model
 {
     protected $fillable = ['name'];
 
-    //Relacion uno a muchos
+    // Relacion uno a muchos
     public function patients()
     {
         return $this->hasMany(Patient::class);

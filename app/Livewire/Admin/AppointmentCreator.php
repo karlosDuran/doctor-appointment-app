@@ -7,14 +7,16 @@ use App\Models\Doctor;
 use App\Models\DoctorSchedule;
 use App\Models\Patient;
 use App\Models\Speciality;
-use Livewire\Component;
 use Carbon\Carbon;
+use Livewire\Component;
 
 class AppointmentCreator extends Component
 {
     // Search filters
     public $searchDate = '';
+
     public $searchTime = '';
+
     public $searchSpeciality = '';
 
     // Available time options (from doctor_schedules)
@@ -22,21 +24,28 @@ class AppointmentCreator extends Component
 
     // Search results
     public $availableDoctors = [];
+
     public $hasSearched = false;
 
     // Selected appointment
     public $selectedDoctorId = null;
+
     public $selectedDoctorName = '';
+
     public $selectedSlotStart = '';
+
     public $selectedSlotEnd = '';
+
     public $selectedDate = '';
 
     // Booking form
     public $patientId = '';
+
     public $reason = '';
 
     // Data for dropdowns
     public $specialities = [];
+
     public $patients = [];
 
     public function mount()
@@ -59,9 +68,10 @@ class AppointmentCreator extends Component
             ->map(function ($schedule) {
                 $start = Carbon::parse($schedule->start_time)->format('H:i:s');
                 $end = Carbon::parse($schedule->end_time)->format('H:i:s');
+
                 return [
                     'value' => $start,
-                    'label' => $start . ' – ' . $end,
+                    'label' => $start.' – '.$end,
                 ];
             })
             ->unique('value')
@@ -90,19 +100,19 @@ class AppointmentCreator extends Component
             'speciality',
             'schedules' => function ($q) use ($dayOfWeek) {
                 $q->where('day_of_week', $dayOfWeek)->orderBy('start_time');
-            }
+            },
         ])
             ->whereHas('schedules', function ($q) use ($dayOfWeek) {
                 $q->where('day_of_week', $dayOfWeek);
 
                 // If specific time selected, filter by that time
-                if (!empty($this->searchTime)) {
+                if (! empty($this->searchTime)) {
                     $q->where('start_time', $this->searchTime);
                 }
             });
 
         // Filter by speciality if selected
-        if (!empty($this->searchSpeciality)) {
+        if (! empty($this->searchSpeciality)) {
             $query->where('speciality_id', $this->searchSpeciality);
         }
 
@@ -124,7 +134,8 @@ class AppointmentCreator extends Component
 
             $availableSlots = $doctor->schedules->filter(function ($schedule) use ($bookedSlots) {
                 $startTime = Carbon::parse($schedule->start_time)->format('H:i:s');
-                return !in_array($startTime, $bookedSlots);
+
+                return ! in_array($startTime, $bookedSlots);
             })->map(function ($schedule) {
                 return [
                     'start' => Carbon::parse($schedule->start_time)->format('H:i:s'),
@@ -136,10 +147,10 @@ class AppointmentCreator extends Component
                 'id' => $doctor->id,
                 'name' => $doctor->user->name,
                 'speciality' => $doctor->speciality->name ?? 'Sin especialidad',
-                'initials' => collect(explode(' ', $doctor->user->name))->map(fn($w) => strtoupper(mb_substr($w, 0, 1)))->take(2)->implode(''),
+                'initials' => collect(explode(' ', $doctor->user->name))->map(fn ($w) => strtoupper(mb_substr($w, 0, 1)))->take(2)->implode(''),
                 'slots' => $availableSlots,
             ];
-        })->filter(fn($d) => count($d['slots']) > 0)->values()->toArray();
+        })->filter(fn ($d) => count($d['slots']) > 0)->values()->toArray();
 
         $this->hasSearched = true;
 

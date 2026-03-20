@@ -12,11 +12,13 @@ class Doctor extends Model
         'medical_license_number',
         'biography',
     ];
+
     // Un doctor pertenece a un usuario
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     // Un doctor tiene una especialidad
     public function speciality()
     {

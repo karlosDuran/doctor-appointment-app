@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Admin\Datatables;
 
+use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Appointment;
 
 class AppointmentTable extends DataTableComponent
 {
@@ -23,14 +23,14 @@ class AppointmentTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")->sortable(),
-            Column::make("Paciente", "patient.user.name")->sortable(),
-            Column::make("Doctor", "doctor.user.name")->sortable(),
-            Column::make("Fecha", "date")->sortable()
-                ->format(fn($value) => $value ? $value->format('d/m/Y') : ''),
-            Column::make("Hora", "start_time")->sortable(),
-            Column::make("Hora Fin", "end_time")->sortable(),
-            Column::make("Estado", "status")
+            Column::make('Id', 'id')->sortable(),
+            Column::make('Paciente', 'patient.user.name')->sortable(),
+            Column::make('Doctor', 'doctor.user.name')->sortable(),
+            Column::make('Fecha', 'date')->sortable()
+                ->format(fn ($value) => $value ? $value->format('d/m/Y') : ''),
+            Column::make('Hora', 'start_time')->sortable(),
+            Column::make('Hora Fin', 'end_time')->sortable(),
+            Column::make('Estado', 'status')
                 ->sortable()
                 ->format(function ($value) {
                     $status = (int) $value;
@@ -46,11 +46,12 @@ class AppointmentTable extends DataTableComponent
                     ];
                     $label = $labels[$status] ?? 'Desconocido';
                     $color = $colors[$status] ?? 'bg-gray-100 text-gray-800';
-                    return '<span class="px-2 py-1 text-xs font-semibold rounded-full ' . $color . '">' . $label . '</span>';
+
+                    return '<span class="px-2 py-1 text-xs font-semibold rounded-full '.$color.'">'.$label.'</span>';
                 })
                 ->html(),
-            Column::make("Acciones")
-                ->label(fn($row) => view('admin.appointments.actions', ['appointment' => $row])),
+            Column::make('Acciones')
+                ->label(fn ($row) => view('admin.appointments.actions', ['appointment' => $row])),
         ];
     }
 }

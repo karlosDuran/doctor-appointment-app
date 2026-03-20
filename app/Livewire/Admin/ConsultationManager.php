@@ -9,11 +9,14 @@ use Livewire\Component;
 class ConsultationManager extends Component
 {
     public $appointmentId;
+
     public $appointment;
 
     // Consultation fields
     public $diagnosis = '';
+
     public $treatment = '';
+
     public $notes = '';
 
     // Medications (prescription)
@@ -21,7 +24,9 @@ class ConsultationManager extends Component
 
     // UI state
     public $activeTab = 'consulta';
+
     public $showHistoryModal = false;
+
     public $showPreviousConsultationsModal = false;
 
     // Previous consultations data
@@ -116,7 +121,7 @@ class ConsultationManager extends Component
 
         // Filter out empty medications
         $prescription = array_filter($this->medications, function ($med) {
-            return !empty($med['name']);
+            return ! empty($med['name']);
         });
 
         $consultationData = [
