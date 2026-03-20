@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Mail;
+
+use App\Models\Appointment;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+class AppointmentReceipt extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public function __construct(public Appointment $appointment)
+    {}
+
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'Comprobante de Cita Médica',
+        );
+    }
+
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.appointment-receipt',
+        );
+    }
+
+    public function attachments(): array
+    {
+        $pdf = Pdf::loadView('pdfs.receipt', ['appointment' => $this->appointment]);
+
+        return [
+            Attachment::fromData(fn () => $pdf->output(), 'comprobante-cita.pdf')
+                ->withMime('application/pdf'),
+        ];
+    }
+}

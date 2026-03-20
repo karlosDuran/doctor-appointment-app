@@ -146,9 +146,10 @@
                         </div>
 
                         {{-- Confirmar --}}
-                        <button wire:click="confirmAppointment" type="button"
-                            class="w-full inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium text-sm rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
-                            Confirmar cita
+                        <button wire:click="confirmAppointment" wire:loading.attr="disabled" wire:target="confirmAppointment" type="button"
+                            class="w-full inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium text-sm rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:opacity-75 disabled:cursor-wait">
+                            <span wire:loading.remove wire:target="confirmAppointment">Confirmar cita</span>
+                            <span wire:loading wire:target="confirmAppointment"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Procesando...</span>
                         </button>
                     </div>
                 @else
