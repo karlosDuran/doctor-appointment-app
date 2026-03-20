@@ -21,7 +21,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create') ; //
+        return view('admin.roles.create'); //
     }
 
     /**
@@ -29,14 +29,14 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name'=> 'required|unique:roles,name']);
+        $request->validate(['name' => 'required|unique:roles,name']);
 
         $role = Role::create($request->all());
 
         session()->flash('swal', [
             'icon' => 'success',
             'title' => '¡Hecho!',
-            'text' => 'Rol creado satisfactoriamente.'
+            'text' => 'Rol creado satisfactoriamente.',
         ]);
 
         return redirect()->route('admin.admin.roles.index');
@@ -56,15 +56,16 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
 
-        if($role->id <=4){
+        if ($role->id <= 4) {
             session()->flash('swal', [
                 'icon' => 'error',
                 'title' => '¡Error!',
-                'text' => 'No se puede editar un rol por defecto.'
+                'text' => 'No se puede editar un rol por defecto.',
             ]);
 
             return redirect()->route('admin.admin.roles.index');
         }
+
         return view('admin.roles.edit', compact('role'));
     }
 
@@ -74,24 +75,25 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $request->validate([
-            'name'=> 'required|unique:roles,name,' . $role->id
+            'name' => 'required|unique:roles,name,'.$role->id,
         ]);
 
-        if($role->name===$request->name){
+        if ($role->name === $request->name) {
             session()->flash('swal', [
                 'icon' => 'info',
                 'title' => 'Sin cambios',
-                'text' => 'No se detectaron cambios'
+                'text' => 'No se detectaron cambios',
             ]);
-            return redirect()->route('admin.admin.roles.edit',$role);
-        };
+
+            return redirect()->route('admin.admin.roles.edit', $role);
+        }
 
         $role->update($request->all());
 
         session()->flash('swal', [
             'icon' => 'success',
             'title' => '¡Hecho!',
-            'text' => 'Rol actualizado satisfactoriamente.'
+            'text' => 'Rol actualizado satisfactoriamente.',
         ]);
 
         return redirect()->route('admin.admin.roles.index');
@@ -102,26 +104,24 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-//Primeros 4 roles fijos
-        if($role->id <=4){
+        // Primeros 4 roles fijos
+        if ($role->id <= 4) {
             session()->flash('swal', [
                 'icon' => 'error',
                 'title' => '¡Error!',
-                'text' => 'No se puede eliminar un rol por defecto.'
+                'text' => 'No se puede eliminar un rol por defecto.',
             ]);
 
             return redirect()->route('admin.admin.roles.index');
         }
 
-
-
-        //Borrar
+        // Borrar
         $role->delete();
 
         session()->flash('swal', [
             'icon' => 'success',
             'title' => '¡Hecho!',
-            'text' => 'Rol eliminado satisfactoriamente.'
+            'text' => 'Rol eliminado satisfactoriamente.',
         ]);
 
         return redirect()->route('admin.admin.roles.index');

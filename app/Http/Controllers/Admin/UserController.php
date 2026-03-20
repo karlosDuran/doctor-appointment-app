@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Patient;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,6 +25,7 @@ class UserController extends Controller
     {
         //
         $roles = Role::all();
+
         return view('admin.users.create', compact('roles'));
     }
 
@@ -49,17 +49,19 @@ class UserController extends Controller
         session()->flash('swal', [
             'icon' => 'success',
             'title' => 'Usuario creado',
-            'text' => 'El usuario ha sido creado exitosamente'
+            'text' => 'El usuario ha sido creado exitosamente',
         ]);
-        //Si el usuario creado es un paciente, crear registro de paciente
+        // Si el usuario creado es un paciente, crear registro de paciente
         if ($user->hasRole('paciente')) {
             $patient = $user->patient()->create([]);
+
             return redirect()->route('admin.admin.patients.edit', $patient);
         }
 
-        //Si el usuario creado es un doctor, crear registro de doctor
+        // Si el usuario creado es un doctor, crear registro de doctor
         if ($user->hasRole('Doctor')) {
             $doctor = $user->doctor()->create([]);
+
             return redirect()->route('admin.admin.doctors.edit', $doctor);
         }
 
@@ -80,6 +82,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+
         return view('admin.users.edit', compact('roles', 'user'));
     }
 
@@ -90,9 +93,9 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'email' => 'required|string|email|unique:users,email,' . $user->id,
+            'email' => 'required|string|email|unique:users,email,'.$user->id,
             'password' => 'nullable|string|min:8|confirmed', // Change required to nullable
-            'id_number' => 'required|string|min:5|max:20|regex:/^[A-Za-z0-9\-]+$/|unique:users,id_number,' . $user->id,
+            'id_number' => 'required|string|min:5|max:20|regex:/^[A-Za-z0-9\-]+$/|unique:users,id_number,'.$user->id,
             'phone' => 'required|digits_between:7,15',
             'address' => 'required|string|min:3|max:255',
             'role_id' => 'required|exists:roles,id',
@@ -101,7 +104,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        //si el usuario quiere cambiar su contraseña que la cambie, si no ño
+        // si el usuario quiere cambiar su contraseña que la cambie, si no ño
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
@@ -111,9 +114,10 @@ class UserController extends Controller
         session()->flash('swal', [
             'icon' => 'success',
             'title' => 'Usuario actualizado',
-            'text' => 'El usuario ha sido actualizado exitosamente'
+            'text' => 'El usuario ha sido actualizado exitosamente',
 
         ]);
+
         return redirect()->route('admin.admin.users.edit', $user)->with('success', 'User updated successfully.');
     }
 
@@ -126,16 +130,16 @@ class UserController extends Controller
             abort(403);
         }
 
-        //Eliminar roles asociados a un usuario
+        // Eliminar roles asociados a un usuario
         $user->roles()->detach();
 
-        //Eliminar el usuario
+        // Eliminar el usuario
         $user->delete();
 
         session()->flash('swal', [
             'icon' => 'success',
             'title' => 'Usuario eliminado',
-            'text' => 'El usuario ha sido eliminado exitosamente'
+            'text' => 'El usuario ha sido eliminado exitosamente',
         ]);
 
         return redirect()->route('admin.admin.users.index');

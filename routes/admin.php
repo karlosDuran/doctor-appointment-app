@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AppointmentController;
+use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\DoctorController;
-use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\InsuranceController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,13 +13,13 @@ Route::get('/', function () {
     return view('admin.dashboard');
 })->name('dashboard');
 
-//Gestion de roles
+// Gestion de roles
 Route::resource('roles', RoleController::class)->names('admin.roles');
 
-//Gestion de usuarios
+// Gestion de usuarios
 Route::resource('users', UserController::class)->names('admin.users');
 
-//Gestion de pacientes
+// Gestion de pacientes
 Route::resource('patients', PatientController::class)->names('admin.patients');
 
 // Gestión de doctores

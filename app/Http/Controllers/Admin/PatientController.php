@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Patient;
-use Illuminate\Support\Facades\Auth;
-use App\Models\BloodType;
 use App\Http\Controllers\Controller;
+use App\Models\BloodType;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -52,6 +51,7 @@ class PatientController extends Controller
     public function edit(Patient $patient)
     {
         $bloodTypes = BloodType::all();
+
         return view('admin.patients.edit', compact('patient', 'bloodTypes'));
     }
 
@@ -82,6 +82,7 @@ class PatientController extends Controller
                 'text' => 'Los datos del paciente se han actualizado correctamente.',
             ]
         );
+
         return redirect()->route('admin.admin.patients.edit', $patient)->with('success', 'Paciente actualizado correctamente');
     }
 

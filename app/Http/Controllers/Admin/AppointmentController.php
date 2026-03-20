@@ -54,6 +54,7 @@ class AppointmentController extends Controller
         $appointment->load('patient.user', 'doctor.user', 'doctor.speciality');
         $patients = Patient::with('user')->get();
         $doctors = Doctor::with('user', 'speciality')->get();
+
         return view('admin.appointments.edit', compact('appointment', 'patients', 'doctors'));
     }
 
@@ -88,6 +89,7 @@ class AppointmentController extends Controller
     public function consult(Appointment $appointment)
     {
         $appointment->load('patient.user', 'doctor.user', 'doctor.speciality', 'consultation');
+
         return view('admin.appointments.consult', compact('appointment'));
     }
 

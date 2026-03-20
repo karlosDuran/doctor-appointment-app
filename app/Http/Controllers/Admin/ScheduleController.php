@@ -10,6 +10,7 @@ class ScheduleController extends Controller
     public function index(Doctor $doctor)
     {
         $doctor->load('user', 'speciality', 'schedules');
+
         return view('admin.doctors.schedules', compact('doctor'));
     }
 }

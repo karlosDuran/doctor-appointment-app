@@ -9,6 +9,7 @@ use Livewire\Component;
 class ScheduleManager extends Component
 {
     public $doctorId;
+
     public $doctor;
 
     // 2D array: selectedSlots[day][time] = true/false
@@ -54,7 +55,7 @@ class ScheduleManager extends Component
             $slots[] = [
                 'start' => $slotStart,
                 'end' => $slotEnd,
-                'label' => $slotStart . ' - ' . $slotEnd,
+                'label' => $slotStart.' - '.$slotEnd,
                 'hour' => $start->copy()->minute(0)->format('H:i:s'),
             ];
 
@@ -90,7 +91,7 @@ class ScheduleManager extends Component
 
     public function toggleSlot($day, $time)
     {
-        $this->selectedSlots[$day][$time] = !$this->selectedSlots[$day][$time];
+        $this->selectedSlots[$day][$time] = ! $this->selectedSlots[$day][$time];
     }
 
     public function toggleAllInHour($hour, $day)
@@ -103,7 +104,7 @@ class ScheduleManager extends Component
         // Check if all are currently selected
         $allSelected = true;
         foreach ($hourSlots as $slot) {
-            if (!($this->selectedSlots[$day][$slot['start']] ?? false)) {
+            if (! ($this->selectedSlots[$day][$slot['start']] ?? false)) {
                 $allSelected = false;
                 break;
             }
@@ -111,7 +112,7 @@ class ScheduleManager extends Component
 
         // Toggle all
         foreach ($hourSlots as $slot) {
-            $this->selectedSlots[$day][$slot['start']] = !$allSelected;
+            $this->selectedSlots[$day][$slot['start']] = ! $allSelected;
         }
     }
 
@@ -129,7 +130,7 @@ class ScheduleManager extends Component
                     $schedulesToInsert[] = [
                         'doctor_id' => $this->doctorId,
                         'day_of_week' => $day,
-                        'start_time' => $time . ':00',
+                        'start_time' => $time.':00',
                         'end_time' => $start->addMinutes(15)->format('H:i:s'),
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -138,7 +139,7 @@ class ScheduleManager extends Component
             }
         }
 
-        if (!empty($schedulesToInsert)) {
+        if (! empty($schedulesToInsert)) {
             DoctorSchedule::insert($schedulesToInsert);
         }
 

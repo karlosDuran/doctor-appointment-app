@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\Appointment;
 use App\Mail\AppointmentReceipt;
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Mail;
 
 class AppointmentObserver

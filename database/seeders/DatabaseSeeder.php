@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,8 +20,8 @@ class DatabaseSeeder extends Seeder
             SpecialitySeeder::class,
         ]);
 
-        //crear un usuario de prueba cada que se ejecuten migraciones
-        //php artisan migrate:fresh --seed
+        // crear un usuario de prueba cada que se ejecuten migraciones
+        // php artisan migrate:fresh --seed
 
     }
 }

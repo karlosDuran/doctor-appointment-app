@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Insurance;
+use Illuminate\Http\Request;
 
 class InsuranceController extends Controller
 {
     public function index()
     {
         $insurances = Insurance::all();
+
         return view('insurances.index', compact('insurances'));
     }
 
@@ -30,7 +30,7 @@ class InsuranceController extends Controller
         Insurance::create($request->all());
 
         return redirect()->route('admin.admin.insurances.index')
-                         ->with('success', 'Aseguradora guardada con éxito.');
+            ->with('success', 'Aseguradora guardada con éxito.');
     }
 
     public function show(Insurance $insurance)
@@ -56,11 +56,11 @@ class InsuranceController extends Controller
         session()->flash('swal', [
             'icon' => 'success',
             'title' => 'Aseguradora actualizada',
-            'text' => 'La aseguradora ha sido actualizada exitosamente'
+            'text' => 'La aseguradora ha sido actualizada exitosamente',
         ]);
 
         return redirect()->route('admin.admin.insurances.index')
-                         ->with('success', 'Aseguradora actualizada con éxito.');
+            ->with('success', 'Aseguradora actualizada con éxito.');
     }
 
     public function destroy(Insurance $insurance)
@@ -70,7 +70,7 @@ class InsuranceController extends Controller
         session()->flash('swal', [
             'icon' => 'success',
             'title' => 'Aseguradora eliminada',
-            'text' => 'La aseguradora ha sido eliminada exitosamente'
+            'text' => 'La aseguradora ha sido eliminada exitosamente',
         ]);
 
         return redirect()->route('admin.admin.insurances.index');

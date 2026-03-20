@@ -13,13 +13,12 @@ class DailyAppointmentsReport extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public Collection $appointments)
-    {}
+    public function __construct(public Collection $appointments) {}
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reporte Diario de Citas - ' . now()->format('d/m/Y'),
+            subject: 'Reporte Diario de Citas - '.now()->format('d/m/Y'),
         );
     }
 
@@ -40,4 +39,3 @@ class DailyAppointmentsReport extends Mailable
         ];
     }
 }
-

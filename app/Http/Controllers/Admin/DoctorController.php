@@ -27,6 +27,7 @@ class DoctorController extends Controller
             ->whereDoesntHave('doctor')
             ->get();
         $specialities = Speciality::all();
+
         return view('admin.doctors.create', compact('users', 'specialities'));
     }
 
@@ -59,6 +60,7 @@ class DoctorController extends Controller
     public function show(string $id)
     {
         $doctor = Doctor::findOrFail($id);
+
         return view('admin.doctors.show', compact('doctor'));
     }
 
@@ -69,6 +71,7 @@ class DoctorController extends Controller
     {
         $doctor = Doctor::findOrFail($id);
         $specialities = Speciality::all();
+
         return view('admin.doctors.edit', compact('doctor', 'specialities'));
     }
 
@@ -89,6 +92,7 @@ class DoctorController extends Controller
             'title' => '¡Doctor actualizado!',
             'text' => 'Los datos del doctor se han actualizado correctamente.',
         ]);
+
         return redirect()->route('admin.admin.doctors.edit', $doctor);
     }
 

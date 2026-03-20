@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Speciality extends Model
 {
     protected $fillable = ['name'];
+
     // Relación uno a muchos
     public function doctors()
     {

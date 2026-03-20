@@ -8,4 +8,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 use Illuminate\Support\Facades\Schedule;
+
 Schedule::command('app:send-daily-report')->dailyAt('17:43');
