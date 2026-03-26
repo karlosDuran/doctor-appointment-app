@@ -27,12 +27,12 @@ class PatientsImport implements ToModel, WithHeadingRow
         }
 
         $user = User::create([
-            'name'      => $row['nombre_completo'] ?? 'Sin nombre',
-            'email'     => $email,
-            'password'  => Hash::make($row['password'] ?? 'password'),
+            'name' => $row['nombre_completo'] ?? 'Sin nombre',
+            'email' => $email,
+            'password' => Hash::make($row['password'] ?? 'password'),
             'id_number' => $row['id_number'] ?? Str::random(8),
-            'phone'     => $row['telefono'] ?? '0000000000',
-            'address'   => $row['direccion'] ?? 'Sin dirección',
+            'phone' => $row['telefono'] ?? '0000000000',
+            'address' => $row['direccion'] ?? 'Sin dirección',
         ]);
 
         $patientRole = Role::where('name', 'patient')->first();
@@ -42,10 +42,13 @@ class PatientsImport implements ToModel, WithHeadingRow
 
         $bloodType = BloodType::where('name', $row['tipo_sangre'] ?? '')->first();
 
-        return new Patient([
-            'user_id'      => $user->id,
-            'blood_type_id' => $bloodType?->id,
-            'allergies'    => $row['alergias'] ?? null,
-        ]);
+        // Crear el Patient directamente con user_id (no está en $fillable del modelo)
+        $patient = new Patient;
+        $patient->user_id = $user->id;
+        $patient->blood_type_id = $bloodType?->id;
+        $patient->allergies = $row['alergias'] ?? null;
+        $patient->save();
+
+        return null; // Ya guardamos manualmente, no dejar que Maatwebsite lo intente de nuevo
     }
 }
