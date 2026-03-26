@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ScheduleController;
@@ -36,4 +37,5 @@ Route::get('appointments/{appointment}/consult', [AppointmentController::class, 
 Route::get('doctors/{doctor}/schedules', [ScheduleController::class, 'index'])->name('admin.doctors.schedules');
 
 // Importación masiva de pacientes
-Route::get('imports', fn () => view('admin.patients.import'))->name('imports');
+Route::get('imports', [ImportController::class, 'show'])->name('imports');
+Route::post('imports', [ImportController::class, 'store'])->name('imports.store');
