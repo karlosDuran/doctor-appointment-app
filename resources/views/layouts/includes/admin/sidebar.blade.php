@@ -51,8 +51,13 @@
             'icon' => 'fa-solid fa-briefcase',
             'href' => route('admin.admin.insurances.index'),
             'active' => request()->routeIs('admin.admin.insurances.*'),
-        ]
-
+        ],
+        [
+            'name' => 'Importar Pacientes',
+            'icon' => 'fa-solid fa-file-import',
+            'href' => route('admin.imports'),
+            'active' => request()->routeIs('admin.imports'),
+        ],
 
     ];
 

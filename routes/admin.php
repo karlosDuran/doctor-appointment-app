@@ -34,3 +34,6 @@ Route::get('appointments/{appointment}/consult', [AppointmentController::class, 
 
 // Horarios de doctores
 Route::get('doctors/{doctor}/schedules', [ScheduleController::class, 'index'])->name('admin.doctors.schedules');
+
+// Importación masiva de pacientes
+Route::get('imports', \App\Livewire\Admin\PatientImporter::class)->name('admin.imports');
