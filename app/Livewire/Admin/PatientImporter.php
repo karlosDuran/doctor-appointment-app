@@ -33,7 +33,6 @@ class PatientImporter extends Component
 
     public function render()
     {
-        return view('livewire.admin.patient-importer')
-            ->layout('layouts.app');
+        return view('livewire.admin.patient-importer');
     }
 }
