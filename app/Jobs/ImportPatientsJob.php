@@ -17,7 +17,7 @@ class ImportPatientsJob implements ShouldQueue
 
     public function handle(): void
     {
-        $fullPath = \Illuminate\Support\Facades\Storage::path($this->filePath);
+        $fullPath = \Illuminate\Support\Facades\Storage::disk('local')->path($this->filePath);
         Excel::import(new PatientsImport, $fullPath);
     }
 }

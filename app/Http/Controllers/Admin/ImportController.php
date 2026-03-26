@@ -19,7 +19,7 @@ class ImportController extends Controller
             'file' => 'required|file|mimes:csv,xlsx,xls|max:10240',
         ]);
 
-        $path = $request->file('file')->store('imports');
+        $path = $request->file('file')->store('imports', 'local');
 
         ImportPatientsJob::dispatch($path);
 
