@@ -55,8 +55,8 @@
         [
             'name' => 'Importar Pacientes',
             'icon' => 'fa-solid fa-file-import',
-            'href' => route('admin.imports'),
-            'active' => request()->routeIs('admin.imports'),
+            'href' => route('admin.admin.imports'),
+            'active' => request()->routeIs('admin.admin.imports'),
         ],
 
     ];
